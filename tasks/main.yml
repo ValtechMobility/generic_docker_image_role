@@ -27,13 +27,13 @@
 
   - name: Build the image
     community.docker.docker_image:
+      name: "{{ generic_docker_image_container_name }}"
       build:
         path: "{{ generic_docker_image_build_source_path }}"
       state: present
       source: build
       force_source: yes
       push: "{{ generic_docker_image_build_push }}"
-      name: "{{ generic_docker_image_build_push_registry }}"
       tag: "{{ generic_docker_image_build_push_version }}"
   when: generic_docker_image_build
 

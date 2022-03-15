@@ -12,7 +12,6 @@ generic_docker_image_build_git_version: "master"
 generic_docker_image_build_source_path: "{{ generic_docker_image_build_git_dest }}/source"
 
 generic_docker_image_build_push: false
-generic_docker_image_build_push_registry: ""
 generic_docker_image_build_push_version: ""
 
 generic_docker_image_cron: false
@@ -26,6 +25,7 @@ generic_docker_image_cron_weekday: "*"
 generic_docker_image_allow_firewall_ports: []
 
 generic_docker_image_container_count: 1
+# needs to be set to docker registry if push is enabled
 generic_docker_image_container_name: "example"
 generic_docker_image_container_image: "example"
 generic_docker_image_container_ports: []
