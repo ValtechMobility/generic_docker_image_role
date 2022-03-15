@@ -1,0 +1,59 @@
+---
+- name: Create base path
+  file:
+    path: "{{ generic_docker_image_base_path }}"
+    state: directory
+    recurse: true
+    owner: "{{ generic_docker_image_uid }}"
+    group: "{{ generic_docker_image_gid }}"
+
+- name: Create additional paths
+  file:
+    path: "{{ item }}"
+    state: directory
+    recurse: true
+    owner: "{{ generic_docker_image_uid }}"
+    group: "{{ generic_docker_image_gid }}"
+  loop: "{{ generic_docker_image_additional_path }}"
+
+- name: Clone repository and build docker image
+  block:
+  - name: Clone git repository
+    git:
+      repo: "{{ generic_docker_image_build_git_url }}"
+      dest: "{{ generic_docker_image_build_git_dest }}"
+      version: "{{ generic_docker_image_build_git_version }}"
+    when: generic_docker_image_build_git
+
+  - name: Build the image
+    community.docker.docker_image:
+      build:
+        path: "{{ generic_docker_image_build_source_path }}"
+      state: present
+      source: build
+      force_source: yes
+      push: "{{ generic_docker_image_build_push }}"
+      name: "{{ generic_docker_image_build_push_registry }}"
+      tag: "{{ generic_docker_image_build_push_version }}"
+  when: generic_docker_image_build
+
+- name: Deploy container
+  community.docker.docker_container:
+    name: "{{ generic_docker_image_container_name }}"
+    image: "{{ generic_docker_image_container_image }}"
+    user: "{{ generic_docker_image_uid }}:{{ generic_docker_image_gid }}"
+    published_ports: "{{ generic_docker_image_container_ports }}"
+    env: "{{ generic_docker_image_container_env | combine(generic_docker_image_container_additional_env) }}"
+    volumes: "{{ generic_docker_image_container_volumes }}"
+    links: "{{ generic_docker_image_container_links }}"
+    state: "{{ generic_docker_image_container_state }}"
+    recreate: "{{ generic_docker_image_container_recreate }}"
+    auto_remove: "{{ generic_docker_image_container_auto_remove }}"
+    cpu_quota: "{{ generic_docker_image_container_cpu_quota }}"
+    memory_reservation: "{{ generic_docker_image_container_memory_reservation }}"
+    memory_swap: "{{ generic_docker_image_container_memory_swap }}"
+    network_mode: "{{ generic_docker_image_container_network_mode }}"
+    networks: "{{ generic_docker_image_container_networks }}"
+    restart: "{{ generic_docker_image_container_restart }}"
+    restart_policy: "{{ generic_docker_image_container_restart_policy }}"
+    command: "{{ generic_docker_image_container_command }}"

@@ -1,0 +1,40 @@
+generic_docker_image_base_path: "/opt/example"
+generic_docker_image_additional_path: []
+generic_docker_image_uid: 0
+generic_docker_image_gid: 0
+
+generic_docker_image_build: false
+
+generic_docker_image_build_git: false
+generic_docker_image_build_git_url: "https://github.com/ansible/ansible-examples.git"
+generic_docker_image_build_git_dest: "/path/to/clone/dest/"
+generic_docker_image_build_git_version: "master"
+generic_docker_image_build_source_path: "{{ generic_docker_image_build_git_dest }}/source"
+
+generic_docker_image_build_push: false
+generic_docker_image_build_push_registry: ""
+generic_docker_image_build_push_version: ""
+
+# Ports that should be opened in ufw
+generic_docker_image_allow_firewall_ports: []
+
+generic_docker_image_container_count: 1
+generic_docker_image_container_name: "example"
+generic_docker_image_container_image: "example"
+generic_docker_image_container_ports: []
+generic_docker_image_container_volumes: []
+generic_docker_image_container_links: []
+generic_docker_image_container_additional_env: {}
+generic_docker_image_container_command: ""
+
+generic_docker_image_container_state: "started"
+generic_docker_image_container_recreate: no
+generic_docker_image_container_auto_remove: no
+generic_docker_image_container_cpu_quota: 0
+generic_docker_image_container_memory: 0
+generic_docker_image_container_memory_reservation: 0
+generic_docker_image_container_memory_swap: 0
+generic_docker_image_container_network_mode: "default"
+generic_docker_image_container_networks: []
+generic_docker_image_container_restart: no
+generic_docker_image_container_restart_policy: "unless-stopped"
