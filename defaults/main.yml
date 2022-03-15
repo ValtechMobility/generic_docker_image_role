@@ -15,6 +15,13 @@ generic_docker_image_build_push: false
 generic_docker_image_build_push_registry: ""
 generic_docker_image_build_push_version: ""
 
+generic_docker_image_cron: false
+generic_docker_image_cron_name: "Start {{ generic_docker_image_container_image }} everyday"
+generic_docker_image_cron_user: "root"
+generic_docker_image_cron_minute: "0"
+generic_docker_image_cron_hour: "0"
+generic_docker_image_cron_weekday: "*"
+
 # Ports that should be opened in ufw
 generic_docker_image_allow_firewall_ports: []
 

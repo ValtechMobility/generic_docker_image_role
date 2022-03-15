@@ -57,3 +57,14 @@
     restart: "{{ generic_docker_image_container_restart }}"
     restart_policy: "{{ generic_docker_image_container_restart_policy }}"
     command: "{{ generic_docker_image_container_command }}"
+
+- name: Create cron job to start Docker container periodically
+  cron:
+    name: "{{ generic_docker_image_cron_name }}"
+    minute: "{{ generic_docker_image_cron_minute }}"
+    hour: "{{ generic_docker_image_cron_hour }}"
+    weekday: "{{ generic_docker_image_cron_weekday }}"
+    user: "{{ generic_docker_image_cron_user }}"
+    state: present
+    job: "docker start {{ generic_docker_image_container_image }}"
+  when: generic_docker_image_cron
