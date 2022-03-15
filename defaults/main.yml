@@ -27,7 +27,7 @@ generic_docker_image_allow_firewall_ports: []
 generic_docker_image_container_count: 1
 # needs to be set to docker registry if push is enabled
 generic_docker_image_container_name: "example"
-generic_docker_image_container_image: "example"
+generic_docker_image_container_image: "example:v1"
 generic_docker_image_container_ports: []
 generic_docker_image_container_volumes: []
 generic_docker_image_container_links: []

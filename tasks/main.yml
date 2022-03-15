@@ -23,11 +23,12 @@
       repo: "{{ generic_docker_image_build_git_url }}"
       dest: "{{ generic_docker_image_build_git_dest }}"
       version: "{{ generic_docker_image_build_git_version }}"
+      ssh_opts: "-o StrictHostKeyChecking=no"
     when: generic_docker_image_build_git
 
   - name: Build the image
     community.docker.docker_image:
-      name: "{{ generic_docker_image_container_name }}"
+      name: "{{ generic_docker_image_container_image }}"
       build:
         path: "{{ generic_docker_image_build_source_path }}"
       state: present
