@@ -67,5 +67,5 @@
     weekday: "{{ generic_docker_image_cron_weekday }}"
     user: "{{ generic_docker_image_cron_user }}"
     state: present
-    job: "docker start {{ generic_docker_image_container_image }}"
+    job: "docker start {{ generic_docker_image_container_name }}"
   when: generic_docker_image_cron
